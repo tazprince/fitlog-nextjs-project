@@ -1,4 +1,6 @@
 
+// For all the data
+
 const getWorkouts = async () => {
     const response = await fetch('https://api.abcz.workers.dev/api/fitlog',{
         // cache:"no-store",

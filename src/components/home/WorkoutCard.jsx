@@ -29,7 +29,7 @@ export default function WorkoutCard({ workout }) {
       <div className="p-5">
         {/* Muscle Groups */}
         <div className="flex flex-wrap gap-2">
-          {workout.muscleGroups?.map((muscle) => (
+          {workout.muscleGroups.map((muscle) => (
             <span
               key={muscle}
               className="rounded-full bg-[#c8ff00] px-2.5 py-1 text-[9px] font-bold uppercase tracking-wide text-black"
