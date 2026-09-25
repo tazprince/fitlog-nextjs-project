@@ -1,5 +1,6 @@
 import { Clock3, Flame, Star, Dumbbell, Target, Repeat } from "lucide-react";
 import Image from "next/image";
+import WorkoutActions from "./WorkoutActions";
 
 export default function WorkoutDetails({ workout }) {
   return (
@@ -133,6 +134,7 @@ export default function WorkoutDetails({ workout }) {
               ))}
             </ol>
           </div>
+          <WorkoutActions workout={workout} />
         </div>
       </div>
     </section>
