@@ -3,7 +3,7 @@
 
 const getWorkouts = async () => {
     const response = await fetch('https://api.abcz.workers.dev/api/fitlog',{
-        // cache:"no-store",
+        cache:"no-store",
     });
     if(!response.ok){
         throw new Error("Failed To Fetch");

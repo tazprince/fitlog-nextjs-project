@@ -106,7 +106,7 @@ export default function WorkoutDetails({ workout }) {
                 </span>
               </div>
 
-              <span className="text-xs">{workout.calories} kcal</span>
+              <span className="text-xs">{workout.caloriesBurned} kcal</span>
             </div>
 
             {/* Rating */}
