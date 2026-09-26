@@ -1,4 +1,5 @@
-import { Link } from "lucide-react";
+import Link from "next/link";
+
 
 const NotFound = () => {
   return (
@@ -15,6 +16,15 @@ const NotFound = () => {
         <p className="mt-2 text-sm text-zinc-500">
           The page you are looking for does not exist.
         </p>
+
+        <div className="mt-5">
+          <Link
+            href="/"
+            className={` rounded-full px-4 py-2 text-[11px] uppercase tracking-wide transition  text-black" border border-[#343941] bg-[#111318] font-medium text-zinc-500 hover:border-[#4a5059] hover:text-white"}`}
+          >
+          Go Home
+          </Link>
+        </div>
 
         
         

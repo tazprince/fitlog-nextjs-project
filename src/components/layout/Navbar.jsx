@@ -16,7 +16,7 @@ const Navbar = () => {
         {/* Dumbel logo */}
         <Link href="/" className="flex items-center gap-2">
           <Image
-            className="flex h-7 w-7 items-center justify-center text-[#c8ff00] bg-[#08090b] backdrop-blur"
+            className="flex h-7 w-7 items-center justify-center text-[#c8ff00]"
             src="/logo.png"
             alt="FITLOG"
             width={100}
@@ -54,7 +54,7 @@ const Navbar = () => {
           </Link>
 
           <Link
-            href=""
+            href="/my-plan"
             className="flex items-center gap-1.5 rounded-full border border-[#343941] px-3 py-1.5 text-[10px] font-medium uppercase text-zinc-400"
           >
             Saved

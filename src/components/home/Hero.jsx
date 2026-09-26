@@ -5,8 +5,8 @@ import React from "react";
 const Hero = () => {
   return (
     <section className="px-5 pt-5 lg:px-8">
-      <div className="mx-auto flex min-h-100 max-w-7xl items-center justify-between overflow-hidden rounded-xl border border-[#252a32] bg-[#14171d] px-6 py-8 sm:px-5 lg:px-10">
-        <div className="w-[65%]">
+      <div className="mx-auto flex min-h-100 max-w-7xl flex-col items-center justify-between overflow-hidden rounded-xl border border-[#252a32] bg-[#14171d] px-6 py-8 sm:px-5 lg:flex-row lg:px-10">
+        <div className="w-full lg:w-[65%]">
           <p className="mb-5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#c8ff00]">
             Workout Library
           </p>
@@ -30,13 +30,13 @@ const Hero = () => {
         </div>
 
         {/* Image */}
-        <div className="flex w-[35%] justify-end ">
+        <div className="mt-8 flex w-full justify-center lg:mt-0 lg:w-[35%] lg:justify-end">
           <Image
             src="/banner.png"
             alt="Workout"
             width={220}
             height={220}
-            className="h-auto w-37.5 sm:w-45  lg:w-75"
+            className="h-auto w-32 sm:w-45 lg:w-75"
           />
         </div>
       </div>
