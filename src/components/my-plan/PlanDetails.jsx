@@ -16,14 +16,14 @@ const PlanDetails = () => {
   const [doneWorkouts, setDoneWorkouts] = useState([]);
 
   const handleMarkAsDone = (id) => {
-  setDoneWorkouts((currentDone) => {
-    if (currentDone.includes(id)) {
-      return currentDone;
-    }
+    setDoneWorkouts((currentDone) => {
+      if (currentDone.includes(id)) {
+        return currentDone;
+      }
 
-    return [...currentDone, id];
-  });
-};
+      return [...currentDone, id];
+    });
+  };
 
   const sortPlanAndSaved = (workout) => {
     const sortedPlanAndSaved = [...workout];
@@ -197,7 +197,8 @@ const PlanDetails = () => {
 
           {/* Sort By */}
           <div className="absolute right-3 top-1.5 flex items-center gap-2">
-            <span className="hidden text-[9px] font-bold uppercase tracking-wider text-zinc-500 sm:block">
+            <span className="hidden whitespace-nowrap text-[9px] font-bold uppercase tracking-wider text-zinc-500 sm:block">
+              
               Sort By
             </span>
 

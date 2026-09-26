@@ -7,17 +7,10 @@ import { FitLogContext } from "../context/FitLogContext";
 import { Bookmark, CalendarPlus } from "lucide-react";
 
 export default function WorkoutActions({ workout }) {
-  const {
-    plan,
-    saved,
-    addToPlan,
-    addToSaved,
-  } = useContext(FitLogContext);
+  const { plan, saved, addToPlan, addToSaved } = useContext(FitLogContext);
 
   const handleAddToPlan = () => {
-    const alreadyExists = plan.some(
-      (item) => item.id === workout.id
-    );
+    const alreadyExists = plan.some((item) => item.id === workout.id);
 
     if (alreadyExists) {
       toast.info("Workout is already in today's plan.");
@@ -30,9 +23,7 @@ export default function WorkoutActions({ workout }) {
   };
 
   const handleSave = () => {
-    const alreadyExists = saved.some(
-      (item) => item.id === workout.id
-    );
+    const alreadyExists = saved.some((item) => item.id === workout.id);
 
     if (alreadyExists) {
       toast.info("Workout is already saved.");
@@ -46,7 +37,6 @@ export default function WorkoutActions({ workout }) {
 
   return (
     <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-
       {/* Add to Today's Plan */}
       <button
         onClick={handleAddToPlan}
@@ -54,7 +44,6 @@ export default function WorkoutActions({ workout }) {
       >
         {/* <CheckCircle2 size={15} /> */}
         <CalendarPlus size={15} />
-
         Add to Today&apos;s Plan
       </button>
 
@@ -64,10 +53,8 @@ export default function WorkoutActions({ workout }) {
         className="flex flex-1 items-center justify-center gap-2 rounded-md border border-[#343941] bg-[#101217] px-5 py-3 text-[10px] font-bold uppercase tracking-wide text-white transition hover:border-[#c8ff00] hover:text-[#c8ff00] hover:cursor-alias"
       >
         <Bookmark size={15} />
-
         Save for Later
       </button>
-
     </div>
   );
 }
