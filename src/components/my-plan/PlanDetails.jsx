@@ -1,21 +1,59 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import { FitLogContext } from "../context/FitLogContext";
 import PlanCard from "./PlanCard";
 
 const PlanDetails = () => {
-  const { plan, saved } = useContext(FitLogContext);
+  const { plan, saved, removeFromPlan, removeFromSaved } =
+    useContext(FitLogContext);
+
+  const [sortBy, setSortBy] = useState("Duration");
+
+  const [activeTab, setActiveTab] = useState("plan");
+
+  const [doneWorkouts, setDoneWorkouts] = useState([]);
+
+  const handleMarkAsDone = (id) => {
+  setDoneWorkouts((currentDone) => {
+    if (currentDone.includes(id)) {
+      return currentDone;
+    }
+
+    return [...currentDone, id];
+  });
+};
+
+  const sortPlanAndSaved = (workout) => {
+    const sortedPlanAndSaved = [...workout];
+
+    if (sortBy === "Rating") {
+      sortedPlanAndSaved.sort((a, b) => b.rating - a.rating);
+    } else if (sortBy === "caloriesBurned") {
+      sortedPlanAndSaved.sort((a, b) => b.caloriesBurned - a.caloriesBurned);
+    } else if (sortBy === "Duration") {
+      sortedPlanAndSaved.sort((a, b) => b.duration - a.duration);
+    }
+
+    return sortedPlanAndSaved;
+  };
+
+  const sortedPlan = sortPlanAndSaved(plan);
+
+  const sortedSaved = sortPlanAndSaved(saved);
+
+  const currentWorkouts = activeTab === "plan" ? plan : saved;
 
   // Total Minutes
-  const totalMinutes = plan.reduce(
+
+  const totalMinutes = currentWorkouts.reduce(
     (total, workout) => total + workout.duration,
     0,
   );
 
   // Total Calories
-  const totalCalories = plan.reduce(
+  const totalCalories = currentWorkouts.reduce(
     (total, workout) => total + workout.caloriesBurned,
     0,
   );
@@ -41,7 +79,7 @@ const PlanDetails = () => {
             </p>
 
             <p className="mt-3 font-display text-4xl font-bold text-[#c8ff00]">
-              {plan.length}
+              {currentWorkouts.length}
             </p>
           </div>
 
@@ -78,6 +116,7 @@ const PlanDetails = () => {
               className="tab"
               aria-label="Today's Plan"
               defaultChecked
+              onChange={() => setActiveTab("plan")}
             />
 
             <div className="tab-content border-[#252a32] bg-[#101217] p-5">
@@ -100,11 +139,14 @@ const PlanDetails = () => {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {plan.map((workout) => (
+                  {sortedPlan.map((workout) => (
                     <PlanCard
                       key={workout.id}
                       workout={workout}
                       showDone={true}
+                      onRemove={removeFromPlan}
+                      onDone={handleMarkAsDone}
+                      isDone={doneWorkouts.includes(workout.id)}
                     />
                   ))}
                 </div>
@@ -117,6 +159,7 @@ const PlanDetails = () => {
               name="my_plan_tabs"
               className="tab"
               aria-label="Saved"
+              onChange={() => setActiveTab("saved")}
             />
 
             <div className="tab-content border-[#252a32] bg-[#101217] p-5">
@@ -139,11 +182,12 @@ const PlanDetails = () => {
                 </div>
               ) : (
                 <div className="space-y-3">
-                  {saved.map((workout) => (
+                  {sortedSaved.map((workout) => (
                     <PlanCard
                       key={workout.id}
                       workout={workout}
                       showDone={false}
+                      onRemove={removeFromSaved}
                     />
                   ))}
                 </div>
@@ -157,10 +201,14 @@ const PlanDetails = () => {
               Sort By
             </span>
 
-            <select className="select select-xs border-[#252a32] bg-[#101217] text-[10px] text-white">
-              <option>Duration</option>
-              <option>Calories</option>
-              <option>Rating</option>
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="select select-xs border-[#252a32] bg-[#101217] text-[10px] text-white"
+            >
+              <option value={"Duration"}>Duration</option>
+              <option value={"caloriesBurned"}>Calories</option>
+              <option value={"Rating"}>Rating</option>
             </select>
           </div>
         </div>

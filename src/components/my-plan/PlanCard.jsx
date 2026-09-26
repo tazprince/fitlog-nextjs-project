@@ -2,8 +2,26 @@ import { Check, Clock3, Flame, Star, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { toast } from "sonner";
 
-const PlanCard = ({ workout, onRemove, showDone = false }) => {
+const PlanCard = ({
+  workout,
+  onRemove,
+  onDone,
+  showDone = false,
+  isDone = false,
+}) => {
+  const handleRemove = () => {
+    onRemove(workout.id);
+
+    toast.success("Workout removed.");
+  };
+
+  const handleDone = () => {
+    onDone(workout.id);
+    toast.success("Workout marked as done");
+  };
+
   return (
     <div className="flex flex-col gap-4 rounded-xl border border-[#252a32] bg-[#101217] p-3 sm:flex-row sm:items-center">
       {/* Image */}
@@ -11,7 +29,8 @@ const PlanCard = ({ workout, onRemove, showDone = false }) => {
         <Image
           src={workout.image}
           alt={workout.name}
-          width={300} height={300}
+          width={300}
+          height={300}
           className="h-full w-full object-cover"
         />
       </div>
@@ -53,17 +72,23 @@ const PlanCard = ({ workout, onRemove, showDone = false }) => {
           View Details
         </Link>
 
-        {/* Mark as Done */}
         {showDone && (
-          <button className="flex items-center gap-1 rounded-full bg-[#c8ff00] px-3 py-2 text-[9px] font-bold uppercase text-black transition hover:bg-[#d5ff4d]">
+          <button
+            onClick={handleDone}
+            className={`flex items-center gap-1 rounded-full px-3 py-2 text-[9px] font-bold uppercase ${
+              isDone
+                ? "bg-zinc-700 text-zinc-400"
+                : "bg-[#c8ff00] text-black hover:bg-[#d5ff4d]"
+            }`}
+          >
             <Check size={12} />
-            Mark as Done
+            {isDone ? "Done" : "Mark as Done"}
           </button>
         )}
 
         {/* Remove */}
         <button
-          onClick={() => onRemove(workout.id)}
+          onClick={handleRemove}
           className="flex h-8 w-8 items-center justify-center rounded-full text-zinc-500 transition hover:bg-[#252a32] hover:text-white"
           aria-label="Remove workout"
         >
